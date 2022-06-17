@@ -1,5 +1,5 @@
 const express = require('express');
-const PORT = 3001;
+const PORT = process.env.port || 3001;
 const path = require('path');
 const app = express()
 
@@ -25,3 +25,5 @@ app.get('/notes', (req, res) => {
 app.listen(PORT, () => {
     console.log(`listening at https://localhost:${PORT}/`);
 })
+
+//so far able to get it to the next page, but without functionality. 
