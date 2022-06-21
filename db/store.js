@@ -17,24 +17,31 @@ class Store{
                 let parsedNotes;
                 try{
                     parsedNotes = [].concat(JSON.parse(notes));
+                    return parsedNotes;
                 } catch(err){
                     parsedNotes = [];
+                    return parsedNotes;
                 };
                     
-                return parsedNotes
             })
+            .catch((err) => console.log(err));
     }
     write(notes){
-        return writeFileAsync('./db/db.json', JSON.stringify(notes))
+        let newNote = JSON.stringify(notes);
+        return writeFileAsync('./db/db.json', newNote)
     }
     addNote(note){
-        return this.getNotes()
+        let newNote = this.getNotes()
+        return newNote
             .then((notes) => {
-                [...notes, note]
+                return [...notes,
+                     note];
             })
             .then((updatedNotes) => {this.write(updatedNotes)})
             .then(() => note)
+            .catch((err) => console.log(err)) 
     }
+
 
 }
 
